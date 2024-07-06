@@ -1,0 +1,7 @@
+
+test.py
+/__pycache__
+/cogs/__pycache__
+/utils/__pycache__
+discord.log
+config.py
