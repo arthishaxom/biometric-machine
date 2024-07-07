@@ -8,19 +8,26 @@ class Verify(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-
-    @app_commands.command()
-    async def setchannel(
-        self, interaction: discord.Interaction, channel: discord.TextChannel
+    @app_commands.command(name="setup")
+    @app_commands.guild_only()
+    @app_commands.checks.has_permissions(administrator=True)
+    async def setupchannel(
+        self, interaction: discord.Interaction
     ):
+        channel = discord.utils.get(interaction.guild.text_channels, name="verify-yourself")
+        if channel:
+            await interaction.response.send_message(f"Verfication Channel already exists - <#{channel.id}>")
+            return
+
+        channel = await interaction.guild.create_text_channel("verify-yourself")
         embed = discord.Embed(
             title="Verify Yourself",
             description="""
             Click the button below to verify yourself
-            > You will get a DM from the bot.""",color=discord.Color.blue()
+            > You will get a DM from the bot.""",color=discord.Color.from_rgb(255,255,255)
         )
         await channel.send(embed=embed,view=verifyButton())
-        await interaction.response.send_message("Sent!")
+        await interaction.response.send_message(f"Verification Channel Created at <#{channel.id}>!")
 
 
 async def setup(bot):

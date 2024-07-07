@@ -65,7 +65,7 @@ async def main():
 
     exts = ["cogs."+os.path.splitext(file)[0] for file in os.listdir("./cogs") if file.endswith(".py")]
     intents = discord.Intents.default()
-    # intents.message_content = True
+    intents.members = True
     async with KittHive(
             commands.when_mentioned,
             initial_extensions=exts,
