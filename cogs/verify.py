@@ -8,7 +8,8 @@ class Verify(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-    @app_commands.command(name="setup")
+
+    @app_commands.command(name="setupchannel")
     @app_commands.guild_only()
     @app_commands.checks.has_permissions(administrator=True)
     async def setupchannel(

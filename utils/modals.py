@@ -63,7 +63,9 @@ class otpModal(discord.ui.Modal, title="Enter OTP"):
             await self.guild.get_member(self.userId).add_roles(verifiedRole)
             await self.guild.get_member(self.userId).add_roles(yearRole)
             await interaction.response.send_message(
-                f"Verified!! You are given **{roleMap[year]}** role"
+                f"Verified!! You are given **{roleMap[year]}** role",delete_after=30
             )
+            await interaction.message.delete(delay=30)
+
         else:
-            await interaction.response.send_message("Invalid")
+            await interaction.response.send_message("Invalid",delete_after=30)

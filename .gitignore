@@ -5,3 +5,4 @@ test.py
 /utils/__pycache__
 discord.log
 config.py
+/.venv
