@@ -22,14 +22,11 @@ class Verify(commands.Cog):
 
         channel = await interaction.guild.create_text_channel("verify-yourself")
         embed = discord.Embed(
-            title="Verify Yourself",
-            description="""
-            Click the button below to verify yourself
-            > You will get a DM from the bot.""",color=discord.Color.from_rgb(255,255,255)
+            title="Verification",
+            description="""Click the button below to verify yourself.""",color=discord.Color.from_rgb(255,255,255)
         )
         await channel.send(embed=embed,view=verifyButton())
         await interaction.response.send_message(f"Verification Channel Created at <#{channel.id}>!")
-
 
 async def setup(bot):
     await bot.add_cog(Verify(bot))
