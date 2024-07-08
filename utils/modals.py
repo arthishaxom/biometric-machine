@@ -31,7 +31,10 @@ class emailModal(discord.ui.Modal, title="Input Your Roll & KIIT Email"):
 
         currOTP = totp.now()
         thing = functools.partial(fn.sendOtp, self.email.value, currOTP)
-        await interaction.client.loop.run_in_executor(None, thing)
+        res = await interaction.client.loop.run_in_executor(None, thing)
+        if(res == "error"):
+            await interaction.response.send_message("We Have Crossed the limit of 100 verifications, kindly try again tomorrow.",ephemeral=True)
+            return
 
         guild = interaction.guild
         userId = interaction.user.id

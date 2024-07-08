@@ -1,4 +1,5 @@
 import resend
+import resend.exceptions
 import config
 from datetime import datetime
 def sendOtp(emailAddress: str, otp: str):
@@ -10,8 +11,11 @@ def sendOtp(emailAddress: str, otp: str):
         "subject": "OTP for Verification",
         "html": f"Your OTP is <strong>{otp}</strong>. It is valid for only 5 minutes only",
     }
-
-    email = resend.Emails.send(params)
+    try:
+        email = resend.Emails.send(params)
+    except resend.exceptions.ResendError as e:
+        print(f"Error - {e}")
+        return "error"
 
 def getInfo(email:str):
     yearDiff = (datetime.now().year % 100) - int(email.split("@")[0][0:2])
