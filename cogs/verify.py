@@ -26,7 +26,7 @@ class Verify(commands.Cog):
             description="""Click the button below to verify yourself.""",color=discord.Color.from_rgb(255,255,255)
         )
         embed.set_footer(text="Limited to 100 verifications daily. Please be patient if unsuccessful.")
-        embed.set_image(url="https://media.discordapp.net/attachments/1254215254695477300/1259758024516435998/standard.gif?ex=668cd896&is=668b8716&hm=f58375b517487cfe29e7aa2ff8f6a017505adc19aeab6bb937d89a8455db987c&=&width=825&height=291")
+        embed.set_image(url="https://media.discordapp.net/attachments/1028362108884226069/1259904743099203695/standard.gif?ex=668d613a&is=668c0fba&hm=21c8a7f28a5177155b6842b73338e6c14663e42ff2fe0d1602935cb58d3ceef5&")
         await channel.send(embed=embed,view=verifyButton())
         await interaction.response.send_message(f"Verification Channel Created at <#{channel.id}>!")
 
