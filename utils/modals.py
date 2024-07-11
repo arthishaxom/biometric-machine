@@ -19,7 +19,7 @@ class emailModal(discord.ui.Modal, title="Type your KIIT mail for OTP"):
     async def on_submit(self, interaction: discord.Interaction) -> None:
         await interaction.response.defer()
         if self.email.value.split("@")[1] != "kiit.ac.in":
-            await interaction.response.send_message("Enter KIIT Email ID only.",ephemeral=True)
+            await interaction.followup.send("Enter KIIT Email ID only.",ephemeral=True)
             return
 
         embed = discord.Embed(
