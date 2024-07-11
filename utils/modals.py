@@ -27,7 +27,7 @@ class emailModal(discord.ui.Modal, title="Type your KIIT mail for OTP"):
             description="""Check `SPAM` Folder if not in your `Inbox`.""",
             color=discord.Color.green(),
         )
-        embed.set_footer("⚠️ OTP is valid for 5 minutes only")
+        embed.set_footer(text="⚠️ OTP is valid for 5 minutes only")
         totp = pyotp.TOTP(pyotp.random_base32(), interval=300)
 
         currOTP = totp.now()
