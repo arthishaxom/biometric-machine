@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
-import motor
 class Misc(commands.Cog):
     """"""
     def __init__(self, bot):
