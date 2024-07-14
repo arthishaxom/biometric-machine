@@ -17,7 +17,7 @@ class emailModal(discord.ui.Modal, title="Type your KIIT mail for OTP"):
         self.add_item(self.email)
 
     async def on_error(self, interaction: discord.Interaction, error: Exception) -> None:
-        await interaction.response.send_message(f"<:kh_error:1261859714304573480> Following error occured : {error}, contact staff",ephemeral=True)
+        await interaction.followup.send(f"<:kh_error:1261859714304573480> Following error occured : {error}, contact staff",ephemeral=True)
 
     async def on_submit(self, interaction: discord.Interaction) -> None:
         await interaction.response.defer()
@@ -43,7 +43,7 @@ class emailModal(discord.ui.Modal, title="Type your KIIT mail for OTP"):
         thing = functools.partial(fn.sendOtp, self.email.value, currOTP)
         res = await interaction.client.loop.run_in_executor(None, thing)
         if(res == "error"):
-            await interaction.followup.send("We Have Crossed the limit of 200 verifications, kindly try again tomorrow.",ephemeral=True)
+            await interaction.followup.send("<a:kh_announce:1261888060103327764> Today's quota completed, try again for verification tommorow",ephemeral=True)
             return
 
         guild = interaction.guild
