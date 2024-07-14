@@ -16,10 +16,19 @@ class emailModal(discord.ui.Modal, title="Type your KIIT mail for OTP"):
         )
         self.add_item(self.email)
 
+    async def on_error(self, interaction: discord.Interaction, error: Exception) -> None:
+        await interaction.response.send_message(f"<:kh_error:1261859714304573480> Following error occured : {error}, contact staff",ephemeral=True)
+
     async def on_submit(self, interaction: discord.Interaction) -> None:
         await interaction.response.defer()
-        if self.email.value.split("@")[1] != "kiit.ac.in":
-            await interaction.followup.send("Enter KIIT Email ID only.",ephemeral=True)
+
+        try:
+            if self.email.value.split("@")[1] != "kiit.ac.in":
+                await interaction.followup.send("Enter KIIT Email ID only.",ephemeral=True)
+                return
+        except Exception as e:
+            print(e)
+            await interaction.followup.send("<:kh_error:1261859714304573480> Enter Valid Email.", ephemeral=True)
             return
 
         embed = discord.Embed(
