@@ -43,7 +43,7 @@ class emailModal(discord.ui.Modal, title="Type your KIIT mail for OTP"):
         thing = functools.partial(fn.sendOtp, self.email.value, currOTP)
         res = await interaction.client.loop.run_in_executor(None, thing)
         if(res == "error"):
-            await interaction.followup.send("We Have Crossed the limit of 100 verifications, kindly try again tomorrow.",ephemeral=True)
+            await interaction.followup.send("We Have Crossed the limit of 200 verifications, kindly try again tomorrow.",ephemeral=True)
             return
 
         guild = interaction.guild
