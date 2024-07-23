@@ -80,10 +80,13 @@ class otpModal(discord.ui.Modal, title="Enter OTP"):
         if self.otp.verify(self.otpInput.value):
             year = fn.getInfo(email=self.email)
             roleMap = {1: "1st year", 2: "2nd year", 3: "3rd year", 4: "4th year"}
-            verifiedRole = self.guild.fetch_role(1259390192549101619)
-            yearRole = discord.utils.get(self.guild.roles, name=roleMap[year])
-            await self.guild.get_member(self.userId).add_roles(verifiedRole)
-            await self.guild.get_member(self.userId).add_roles(yearRole)
+            try:
+                verifiedRole = self.guild.get_role(1259390192549101619)
+                yearRole = discord.utils.get(self.guild.roles, name=roleMap[year])
+                await self.guild.get_member(self.userId).add_roles(verifiedRole)
+                await self.guild.get_member(self.userId).add_roles(yearRole)
+            except Exception as e:
+                print(traceback.format_exc())
             await interaction.followup.send(
                 f"Verified!! You are given **{roleMap[year]}** role",ephemeral=True
             )
