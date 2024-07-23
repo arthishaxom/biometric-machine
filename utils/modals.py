@@ -3,7 +3,7 @@ import discord
 from discord.utils import MISSING
 import pyotp
 import time
-
+import traceback
 import utils.buttons as btn
 import utils.funcs as fn
 
@@ -17,7 +17,9 @@ class emailModal(discord.ui.Modal, title="Type your KIIT mail for OTP"):
         self.add_item(self.email)
 
     async def on_error(self, interaction: discord.Interaction, error: Exception) -> None:
+        print(traceback.format_exc())
         await interaction.followup.send(f"<:kh_error:1261859714304573480> Following error occured : {error}, contact staff",ephemeral=True)
+        return
 
     async def on_submit(self, interaction: discord.Interaction) -> None:
         await interaction.response.defer()
@@ -37,21 +39,23 @@ class emailModal(discord.ui.Modal, title="Type your KIIT mail for OTP"):
             color=discord.Color.green(),
         )
         embed.set_footer(text="⚠️ OTP is valid for 5 minutes only")
-        totp = pyotp.TOTP(pyotp.random_base32(), interval=300)
-
-        currOTP = totp.now()
-        thing = functools.partial(fn.sendOtp, self.email.value, currOTP)
-        res = await interaction.client.loop.run_in_executor(None, thing)
-        if(res == "error"):
-            await interaction.followup.send("<a:kh_announce:1261888060103327764> Today's quota completed, try again for verification tommorow",ephemeral=True)
-            return
-
+        
         guild = interaction.guild
         userId = interaction.user.id
+        totp = pyotp.TOTP(pyotp.random_base32(), interval=300)
+        currOTP = totp.now()
 
         await interaction.user.send(
             embed=embed, view=btn.otpButton(totp, self.email.value, guild, userId)
         )
+
+        thing = functools.partial(fn.sendOtp, self.email.value, currOTP)
+        res = await interaction.client.loop.run_in_executor(None, thing)
+        if(res == "error"):
+            print(traceback.format_exc())
+            await interaction.followup.send("<a:kh_announce:1261888060103327764> Today's quota completed, try again for verification tommorow",ephemeral=True)
+            return
+
         await interaction.followup.send("Check your DM", ephemeral=True)
 
 
@@ -72,7 +76,7 @@ class otpModal(discord.ui.Modal, title="Enter OTP"):
         if self.otp.verify(self.otpInput.value):
             year = fn.getInfo(email=self.email)
             roleMap = {1: "1st year", 2: "2nd year", 3: "3rd year", 4: "4th year"}
-            verifiedRole = discord.utils.get(self.guild.roles, name="Verified")
+            verifiedRole = self.guild.get_role(1259390192549101619)
             yearRole = discord.utils.get(self.guild.roles, name=roleMap[year])
             await self.guild.get_member(self.userId).add_roles(verifiedRole)
             await self.guild.get_member(self.userId).add_roles(yearRole)
