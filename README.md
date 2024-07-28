@@ -1,7 +1,68 @@
-<p align="center">
-  <img src="https://media.discordapp.net/attachments/1254215254695477300/1259159728622403604/kiithive.png?ex=668aab61&is=668959e1&hm=1ef31131612e809938de1806ec42defa29096c8be2b055f09d6da0161920607d&=&format=webp&quality=lossless&width=663&height=663" width="300px">
-</p>
-<h1 align="center">KIIT HIVE</h1>
-<h2 align="center">Helper Discord Bot for <a href="https://discord.gg/7f7GVAKfFf"> KIIT HIVE </a> discord server</h2>
+
+[![](https://dcbadge.limes.pink/api/server/https://discord.gg/7f7GVAKfFf)](https://discord.gg/7f7GVAKfFf)
+
+![PyPI - Version](https://img.shields.io/pypi/v/discord.py?style=for-the-badge)
+
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/discord.py?style=for-the-badge&color=%23e3a93d)
 
 
+
+
+# Biometric Machine
+
+A Discord bot designed for the [**KIIT HIVE**](https://discord.gg/7f7GVAKfFf) server. It streamlines member verification by authenticating users through their KIIT University email addresses. The bot requests the user's KIIT email, sends a One-Time Password (OTP), verifies the user upon correct OTP entry, and automatically assigns roles based on the user's roll number. This process ensures a secure environment exclusive to verified KIIT University community members.
+
+
+## Features
+
+- Email OTP Verification
+- Automatic Role Baed on Roll Number
+
+
+## Roadmap
+
+- Adding database to store already verified emails.
+- Add blacklist command to ban a email.
+
+
+## Contributing
+
+Contributions are always welcome! They can be anything like - 
+- Code Optimization
+- New/Better Feature Implementation
+- Bug fixing
+- Documentation Update
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/arthishaxom/biometric-machine
+```
+
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies (Better if you use a [virtual environment](https://www.youtube.com/watch?v=Y21OR1OPC9A&t=144s))
+
+```bash
+  pip install -r requirements.txt
+```
+
+Create a file `config.py` put your tokens and api_keys accordingly
+- you can use [resend](https://resend.com/emails) for testing as brevo requires you to get a domain
+- replace the relevant code in [funcs.py](utils/funcs.py)
+```bash
+  DISCORD_TOKEN = "your_token"
+  BREVO_KEY = "brevo_api_key" 
+  GUILD_ID = testing_guild_id
+```
+
+Start the bot
+```bash
+py main.py
+```
