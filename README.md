@@ -44,7 +44,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd biometric-machine
 ```
 
 Install dependencies (Better if you use a [virtual environment](https://www.youtube.com/watch?v=Y21OR1OPC9A&t=144s))
@@ -53,7 +53,7 @@ Install dependencies (Better if you use a [virtual environment](https://www.yout
   pip install -r requirements.txt
 ```
 
-Create a file `config.py` put your tokens and api_keys accordingly
+Create a file `config.py` & put your tokens and api_keys accordingly
 - you can use [resend](https://resend.com/emails) for testing as brevo requires you to get a domain
 - replace the relevant code in [funcs.py](utils/funcs.py)
 ```bash
