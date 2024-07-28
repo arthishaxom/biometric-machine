@@ -16,7 +16,7 @@ A Discord bot designed for the [**KIIT HIVE**](https://discord.gg/7f7GVAKfFf) se
 ## Features
 
 - Email OTP Verification
-- Automatic Role Baed on Roll Number
+- Automatic Role Based on Roll Number
 
 
 ## Roadmap
@@ -66,3 +66,6 @@ Start the bot
 ```bash
 py main.py
 ```
+
+## Acknowledgements
+- [itsabhinavism](https://github.com/itsabhinavism) - Helped in ideation of Bot 
