@@ -21,8 +21,8 @@ A Discord bot designed for the [**KIIT HIVE**](https://discord.gg/7f7GVAKfFf) se
 
 ## Roadmap
 
-- Adding database to store already verified emails.
-- Add blacklist command to ban a email.
+- [x] Adding database to store already verified emails.
+- [x] Add blacklist command to ban a email.
 
 
 ## Contributing
