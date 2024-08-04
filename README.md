@@ -60,6 +60,13 @@ Create a file `config.py` & put your tokens and api_keys accordingly
   DISCORD_TOKEN = "your_token"
   BREVO_KEY = "brevo_api_key" 
   GUILD_ID = testing_guild_id
+  DB_CONN = "mongodb_api_key"
+```
+
+Create a file `constants.py` in ./utils folder & put your role ids accordingly
+```bash
+  roleMap = {1: 1st_year_role_id, 2: 2nd_year_role_id, 3: 3rd_year_role_id, 4: 4th_year_role_id, 5:alumni_year_role_id}
+  verifiedRole = verified_role_id
 ```
 
 Start the bot

@@ -42,4 +42,6 @@ def getInfo(email: str):
         year = yearDiff
     else:
         year = yearDiff + 1
+    if year > 4:
+        year = 5
     return year

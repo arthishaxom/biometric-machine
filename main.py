@@ -2,6 +2,8 @@ import asyncio
 import logging
 import logging.handlers
 import os
+
+import motor.motor_asyncio
 import config
 
 from typing import List, Optional
@@ -24,11 +26,13 @@ class KittHive(commands.Bot):
         *args,
         initial_extensions: List[str],
         testing_guild_id: Optional[int] = None,
+        db_conn,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.testing_guild_id = testing_guild_id
         self.initial_extensions = initial_extensions
+        self.db_conn = motor.motor_asyncio.AsyncIOMotorClient(db_conn)
 
     async def setup_hook(self) -> None:
         await self.load_extension('jishaku')
@@ -71,6 +75,7 @@ async def main():
             initial_extensions=exts,
             intents=intents,
             testing_guild_id=config.GUILD_ID,
+            db_conn=config.DB_CONN
         ) as bot:
             await bot.start(config.DISCORD_TOKEN)
 

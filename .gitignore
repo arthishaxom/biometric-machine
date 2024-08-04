@@ -6,3 +6,4 @@ test.py
 discord.log
 config.py
 /.venv
+utils/constants.py

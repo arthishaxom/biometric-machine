@@ -12,13 +12,11 @@ class verifyButton(discord.ui.View):
 
 
 class otpButton(discord.ui.View):
-    def __init__(self, otp, email: str, guild, userId, timeout: float | None = 180):
+    def __init__(self, otp, email: str, timeout: float | None = 300):
         self.otp=otp
         self.email = email
-        self.guild = guild
-        self.userId = userId
         super().__init__(timeout=timeout)
     
     @discord.ui.button(label="Enter OTP", style=discord.ButtonStyle.green)
     async def otpBtn(self, interaction: discord.Interaction, button):
-        await interaction.response.send_modal(md.otpModal(self.otp,self.email,self.guild,self.userId))
+        await interaction.response.send_modal(md.otpModal(self.otp,self.email))

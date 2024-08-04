@@ -16,6 +16,7 @@ class Verify(commands.Cog):
     async def setupchannel(
         self,
         interaction: discord.Interaction,
+        channel: discord.TextChannel = None
     ):
         embed = discord.Embed(
             title="Verification",
@@ -28,18 +29,15 @@ class Verify(commands.Cog):
         embed.set_image(
             url="https://media.discordapp.net/attachments/1028362108884226069/1259904743099203695/standard.gif?ex=668d613a&is=668c0fba&hm=21c8a7f28a5177155b6842b73338e6c14663e42ff2fe0d1602935cb58d3ceef5&"
         )
-        channel = discord.utils.get(
-            interaction.guild.text_channels, name="verify-yourself"
-        )
         if channel:
-            await interaction.response.send_message(
-                f"Verfication Channel already exists - <#{channel.id}>"
-            )
             async for msg in channel.history(limit=5):
                 if msg.author == self.bot.user:
                     await msg.edit(embed=embed, view=verifyButton())
-                    return
-            await channel.send(embed=embed, view=verifyButton())
+                    break
+                else:
+                    await channel.send(embed=embed, view=verifyButton())
+                    break
+            await interaction.response.send_message(f"Message Sent in <#{channel.id}>", ephemeral=True)
             return
         else:
             channel = await interaction.guild.create_text_channel("verify-yourself")
@@ -47,6 +45,15 @@ class Verify(commands.Cog):
             await interaction.response.send_message(
                 f"Verification Channel Created at <#{channel.id}>!"
             )
+
+    async def cog_app_command_error(
+        self,
+        interaction: discord.Interaction,
+        error: app_commands.AppCommandError
+    ):
+        if isinstance(error,app_commands.MissingPermissions):
+            await interaction.response.send_message("You Don't Have The PERMISSIONS.", ephemeral=True)
+            return
 
 
 async def setup(bot):
