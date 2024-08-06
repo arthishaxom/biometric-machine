@@ -123,7 +123,7 @@ class otpModal(discord.ui.Modal, title="Enter OTP"):
                 await veri_details.insert_one(
                     {
                         "userid": interaction.user.id,
-                        "useremail": "22053062@kiit.ac.in",
+                        "useremail": f"{self.email}",
                         "status": "verified",
                     }
                 )
