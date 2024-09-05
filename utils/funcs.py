@@ -8,7 +8,7 @@ from datetime import datetime
 
 
 def sendOtp(emailAddress: str, otp: str):
-    resend.api_key = "re_123456789"
+    resend.api_key = config.RESEND_KEY
 
     params: resend.Emails.SendParams = {
     "from": "KIIT HIVE <kiithive@ashishpothal.tech>",
